@@ -24,19 +24,18 @@ public class Enemy extends AnimSprite implements BoxCollidable, Recyclable {
     protected float dy;
     protected RectF boundingBox = new RectF();
     protected static int[] bitmapIds = {
-            R.mipmap.enemy_01,R.mipmap.enemy_02,R.mipmap.enemy_03,R.mipmap.enemy_04,R.mipmap.enemy_05,
-            R.mipmap.enemy_06,R.mipmap.enemy_07,R.mipmap.enemy_08,R.mipmap.enemy_09,R.mipmap.enemy_10,
-            R.mipmap.enemy_11,R.mipmap.enemy_12,R.mipmap.enemy_13,R.mipmap.enemy_14,R.mipmap.enemy_15,
-            R.mipmap.enemy_16,R.mipmap.enemy_17,R.mipmap.enemy_18,R.mipmap.enemy_19,R.mipmap.enemy_20,
+            R.mipmap.enemy01,R.mipmap.enemy02,R.mipmap.enemy03,
+            R.mipmap.boss01,R.mipmap.boss02,R.mipmap.boss03,
+
     };
     public static final int MIN_LEVEL = 1;
     public static final int MAX_LEVEL = bitmapIds.length;
 
-//    protected static ArrayList<Enemy> recycleBin = new ArrayList<>();
+
     public static Enemy get(int level, float x, float speed) {
         Enemy enemy = (Enemy) RecycleBin.get(Enemy.class);
         if (enemy != null) {
-//            Enemy enemy = recycleBin.remove(0);
+
             enemy.set(level, x, speed);
             return enemy;
         }
@@ -53,10 +52,9 @@ public class Enemy extends AnimSprite implements BoxCollidable, Recyclable {
         gauge.setValue(1.0f);
     }
     private Enemy(int level, float x, float speed) {
-        super(x, -size, size, size, bitmapIds[level - 1], FRAMES_PER_SECOND, 0);
+        super(x, -size, size, size, bitmapIds[level - 1], FRAMES_PER_SECOND, 4);
         this.level = level;
-//        y -= radius;
-//        setDstRectWithRadius();
+
         dy = speed;
         life = maxLife = level * 10;
         gauge = new Gauge(
@@ -79,7 +77,7 @@ public class Enemy extends AnimSprite implements BoxCollidable, Recyclable {
         boundingBox.inset(size/16, size/16);
         if (dstRect.top > Metrics.height) {
             BaseGame.getInstance().remove(this);
-            //recycleBin.add(this);
+
         }
     }
 

@@ -5,14 +5,17 @@ import android.graphics.Canvas;
 import android.graphics.RectF;
 
 import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.game.BaseGame;
+import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.interfaces.GameObject;
+import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.objects.AnimSprite;
 import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.res.Metrics;
 import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.R;
 import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.objects.Sprite;
 import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.res.BitmapPool;
 
-public class Fighter extends Sprite {
+public class Fighter extends Sprite implements GameObject {
     private static final String TAG = Fighter.class.getSimpleName();
     private RectF targetRect = new RectF();
+
 
 //    private float angle;
     private float dx, dy;
@@ -21,22 +24,24 @@ public class Fighter extends Sprite {
     private float fireInterval = 1.0f / 10;
 
     private static Bitmap targetBitmap;
-//    private static Rect srcRect;
+
+    private int bulletLevel;
+    private int life;
+    private int bulletNum;
+    private int coin;
+    private boolean onSkill;
 
     public Fighter(float x, float y) {
-        super(x, y, R.dimen.fighter_radius, R.mipmap.plane_240);
+        super(x, y, R.dimen.fighter_radius, R.mipmap.player);
         setTargetPosition(x, y);
-        //angle = -(float) (Math.PI / 2);
 
         targetBitmap = BitmapPool.get(R.mipmap.target);
+
         fireInterval = Metrics.floatValue(R.dimen.fighter_fire_interval);
     }
 
     public void draw(Canvas canvas) {
-//        canvas.save();
-//        canvas.rotate((float) (angle * 180 / Math.PI) + 90, x, y);
         canvas.drawBitmap(bitmap, null, dstRect, null);
-//        canvas.restore();
         if (dx != 0 || dy != 0) {
             canvas.drawBitmap(targetBitmap, null, targetRect, null);
         }

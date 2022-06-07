@@ -13,6 +13,7 @@ public class EnemyGenerator implements GameObject {
     private static final float INITIAL_SPAWN_INTERVAL = 2.0f;
     private final float spawnInterval;
     private final float fallSpeed;
+    private float levelFallSpeed;
     private float elapsedTime;
     private int wave;
 
@@ -41,7 +42,8 @@ public class EnemyGenerator implements GameObject {
             int level = (wave + 15) / 10 - r.nextInt(3);
             if (level < Enemy.MIN_LEVEL) level = Enemy.MIN_LEVEL;
             if (level > Enemy.MAX_LEVEL) level = Enemy.MAX_LEVEL;
-            Enemy enemy = Enemy.get(level, tenth * i, fallSpeed);
+            
+            Enemy enemy = Enemy.get(level, tenth * i, fallSpeed * levelFallSpeed);
             MainGame.get().add(MainGame.Layer.enemy, enemy);
         }
     }
