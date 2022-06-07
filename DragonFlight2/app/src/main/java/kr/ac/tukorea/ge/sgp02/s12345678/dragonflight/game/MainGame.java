@@ -46,8 +46,8 @@ public class MainGame extends BaseGame {
 //        score.set(123456);
         add(Layer.ui, score);
 
-        add(Layer.bg1, new VertScrollBackground(R.mipmap.bg_city, Metrics.size(R.dimen.bg_speed_city)));
-        add(Layer.bg2, new VertScrollBackground(R.mipmap.clouds, Metrics.size(R.dimen.bg_speed_cloud)));
+        add(Layer.bg1, new VertScrollBackground(R.mipmap.scene01, Metrics.size(R.dimen.bg_speed_city)));
+      //  add(Layer.bg2, new VertScrollBackground(R.mipmap.clouds, Metrics.size(R.dimen.bg_speed_cloud)));
 
     }
 
